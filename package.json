@@ -1,0 +1,38 @@
+{
+  "name": "@cch137/shuttle",
+  "version": "0.1.0",
+  "description": "",
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "devbuild": "tsc -w",
+    "devstart": "nodemon ./dist/index.test.js",
+    "test": "npm-run-all --parallel devbuild devstart",
+    "build": "npm i && tsc",
+    "start": "node ./dist/index.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://githib.com/cch137/ts-shuttle"
+  },
+  "keywords": [
+    "cch137",
+    "shuttle"
+  ],
+  "author": "cch137",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^20.12.7",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@cch137/random": "^0.1.0",
+    "crypto-js": "^4.2.0"
+  }
+}
