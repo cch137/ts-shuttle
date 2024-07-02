@@ -485,7 +485,7 @@ export function serialize(
   );
 }
 
-export function deserialize<T = unknown>(
+export function parse<T = unknown>(
   data: Uint8Array,
   options?: ShuttleOptions & { salts?: number[] }
 ): T {
@@ -500,5 +500,5 @@ export function deserialize<T = unknown>(
 
 export default class Shuttle {
   static serialize = serialize;
-  static deserialize = deserialize;
+  static parse = parse;
 }

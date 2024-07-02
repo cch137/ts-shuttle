@@ -1,4 +1,4 @@
-import { deserialize, serialize } from "./index.js";
+import { parse, serialize } from "./index.js";
 
 const x3 = [
   [1, "hi 你好", false, true, null],
@@ -27,5 +27,5 @@ const salts =
     .fill(1)
     .map((i) => Math.floor(Math.random() * 1000000000000000)) || [];
 const a3 = serialize(x3, { salts, md5: true });
-const b3 = deserialize(a3, { salts, md5: true });
+const b3 = parse(a3, { salts, md5: true });
 console.log(a3.buffer.byteLength, b3);
