@@ -1,6 +1,6 @@
 {
   "name": "@cch137/shuttle",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "type": "module",
   "main": "./dist/index.js",
@@ -32,7 +32,7 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@cch137/random": "^0.1.0",
+    "@cch137/random": "^0.1.1",
     "crypto-js": "^4.2.0"
   }
 }

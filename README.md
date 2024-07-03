@@ -69,7 +69,7 @@ Serializes the input data into a `Uint8Array`.
   - `md5`: Whether to use MD5 hashing (default: `false`).
   - `salts`: An array of salts for encryption.
 
-### `Shuttle.parse<T = unknown>(data: Uint8Array, options?: ShuttleOptions & { salts?: number[] }): T`
+### `Shuttle.parse<T>(data: Uint8Array, options?: ShuttleOptions & { salts?: number[] }): T`
 
 Deserializes the input `Uint8Array` back into the original data.
 
