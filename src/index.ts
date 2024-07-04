@@ -486,9 +486,10 @@ export function serialize(
 }
 
 export function parse<T = unknown>(
-  data: Uint8Array,
+  data: Uint8Array | Buffer,
   options?: ShuttleOptions & { salts?: number[] }
 ): T {
+  if (data instanceof Buffer) data = Uint8Array.from(data);
   const decrypted = decryptUint8Array(data, ...((options?.salts || []) as any));
   if (!options?.md5) return decodeItem(decrypted) as T;
   const encoded = decrypted.slice(34);
