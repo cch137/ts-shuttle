@@ -1,9 +1,10 @@
 {
   "name": "@cch137/shuttle",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "",
   "type": "module",
-  "main": "./dist/index.js",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "devbuild": "tsc -w",
     "devstart": "nodemon ./dist/index.test.js",
@@ -32,7 +33,7 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@cch137/random": "^0.1.1",
+    "@cch137/random": "^0.1.2",
     "crypto-js": "^4.2.0"
   }
 }
