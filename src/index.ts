@@ -471,6 +471,36 @@ function decryptUint8Array(array: Uint8Array | number[], ...salts: number[]) {
   return buffer;
 }
 
+function encodeURL(s: string) {
+  return s.replaceAll("+", "-").replaceAll("/", "_").replaceAll("=", "");
+}
+
+function decodeURL(s: string) {
+  return s.replaceAll("-", "+").replaceAll("_", "/");
+}
+
+function uint8ArrayToNumbers(array: Uint8Array | (number | bigint)[]) {
+  return [...(array as (number | bigint)[])].map((i) => Number(i));
+}
+
+function numbersToAscii(array: Uint8Array | (number | bigint)[]) {
+  return btoa(
+    String.fromCharCode.apply(null, uint8ArrayToNumbers(array))
+  ).replace(/[=]+$/, "");
+}
+
+function asciiToNumbers(array: string) {
+  return Array.from(atob(array)).map((c) => c.charCodeAt(0));
+}
+
+export function base64UrlToBuffer(array: string) {
+  return asciiToNumbers(decodeURL(array));
+}
+
+export function bufferTobase64Url(array: Uint8Array) {
+  return numbersToAscii(array);
+}
+
 export function serialize(
   data: any,
   options?: ShuttleOptions & { salts?: number[] }
@@ -500,6 +530,8 @@ export function parse<T = unknown>(
 }
 
 export default class Shuttle {
+  static base64UrlToBuffer = base64UrlToBuffer;
+  static bufferTobase64Url = bufferTobase64Url;
   static serialize = serialize;
   static parse = parse;
 }
