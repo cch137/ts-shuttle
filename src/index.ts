@@ -494,7 +494,7 @@ function asciiToNumbers(array: string) {
 }
 
 export function base64UrlToBuffer(array: string) {
-  return asciiToNumbers(decodeURL(array));
+  return Uint8Array.from(asciiToNumbers(decodeURL(array)));
 }
 
 export function bufferTobase64Url(array: Uint8Array) {
