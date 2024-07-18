@@ -531,7 +531,7 @@ export function parse<T = unknown>(
 
 export default class Shuttle {
   static base64UrlToBuffer = base64UrlToBuffer;
-  static bufferTobase64Url = bufferToBase64Url;
+  static bufferToBase64Url = bufferToBase64Url;
   static serialize = serialize;
   static parse = parse;
 }
