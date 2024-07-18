@@ -497,7 +497,7 @@ export function base64UrlToBuffer(array: string) {
   return Uint8Array.from(asciiToNumbers(decodeURL(array)));
 }
 
-export function bufferTobase64Url(array: Uint8Array) {
+export function bufferToBase64Url(array: Uint8Array) {
   return numbersToAscii(array);
 }
 
@@ -531,7 +531,7 @@ export function parse<T = unknown>(
 
 export default class Shuttle {
   static base64UrlToBuffer = base64UrlToBuffer;
-  static bufferTobase64Url = bufferTobase64Url;
+  static bufferTobase64Url = bufferToBase64Url;
   static serialize = serialize;
   static parse = parse;
 }
