@@ -267,15 +267,15 @@ function toUintArray(
   const length = dv.buffer.byteLength;
   switch (to) {
     case 8:
-      return new Uint8Array(length).map((_, i) => dv.getUint8(i));
+      return new Uint8Array(length).map((_, i) => dv.getUint8(i)) as Uint8Array;
     case 16:
       return new Uint16Array(length / 2).map((_, i) =>
         dv.getUint16(i * 2, true)
-      );
+      ) as Uint16Array;
     case 32:
       return new Uint32Array(length / 4).map((_, i) =>
         dv.getUint32(i * 4, true)
-      );
+      ) as Uint32Array;
   }
 }
 
@@ -471,34 +471,25 @@ function decryptUint8Array(array: Uint8Array | number[], ...salts: number[]) {
   return buffer;
 }
 
-function encodeURL(s: string) {
-  return s.replaceAll("+", "-").replaceAll("/", "_").replaceAll("=", "");
+export function base64ToBuffer(s: string) {
+  return Uint8Array.from(Array.from(atob(s)).map((c) => c.charCodeAt(0)));
 }
 
-function decodeURL(s: string) {
-  return s.replaceAll("-", "+").replaceAll("_", "/");
-}
-
-function uint8ArrayToNumbers(array: Uint8Array | (number | bigint)[]) {
-  return [...(array as (number | bigint)[])].map((i) => Number(i));
-}
-
-function numbersToAscii(array: Uint8Array | (number | bigint)[]) {
+export function bufferToBase64(array: Uint8Array) {
   return btoa(
-    String.fromCharCode.apply(null, uint8ArrayToNumbers(array))
+    String.fromCharCode.apply(
+      null,
+      Array.from(array).map((i) => Number(i))
+    )
   ).replace(/[=]+$/, "");
 }
 
-function asciiToNumbers(array: string) {
-  return Array.from(atob(array)).map((c) => c.charCodeAt(0));
-}
-
-export function base64UrlToBuffer(array: string) {
-  return Uint8Array.from(asciiToNumbers(decodeURL(array)));
+export function base64UrlToBuffer(s: string) {
+  return base64ToBuffer(s.replaceAll("-", "+").replaceAll("_", "/"));
 }
 
 export function bufferToBase64Url(array: Uint8Array) {
-  return numbersToAscii(array);
+  return bufferToBase64(array).replaceAll("+", "-").replaceAll("/", "_");
 }
 
 export function serialize(
@@ -530,6 +521,8 @@ export function parse<T = unknown>(
 }
 
 export default class Shuttle {
+  static base64ToBuffer = base64ToBuffer;
+  static bufferToBase64 = bufferToBase64;
   static base64UrlToBuffer = base64UrlToBuffer;
   static bufferToBase64Url = bufferToBase64Url;
   static serialize = serialize;
